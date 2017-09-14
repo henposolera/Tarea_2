@@ -5,7 +5,7 @@ clientes entre ellos se retaban con el arco y flecha. El que perdía de un grupo
 personas, pedía palomitas de almuerzo de cortesía como castigo.
 Fue así como dona María tuvo una nueva idea: hacer un juego para que los clientes
 jugaran entre ellos y compraran almuerzos con mayor frecuencia.
-
+ 
 Doña María inventó las siguientes reglas:
      En cada ronda pueden participar de 2 hasta 4 jugadores.
      Cada jugador puede lanzar 2 veces las tres flechas por ronda.
