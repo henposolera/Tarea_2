@@ -18,15 +18,6 @@ int main ()
 	    cout<< "\nRandom X = "<<random_x[t];
 	}
 
-/*
-f1 = randomNumber();
-cout << f1 << endl;
-f2 = randomNumber();
-cout << f2 << endl;
-
-
-f3 = randomNumber();
-cout << f3 << endl;*/
 
   return 0;
 }
@@ -34,11 +25,8 @@ cout << f3 << endl;*/
 
 int randomNumber(){
 	  int iSecret;
-
-
 	  /* initialize random seed: */
 	  srand (time(0));
-
 	  /* generate secret number between 1 and 10: */
 	  iSecret = rand() % 10 + 1;
 	  return iSecret;
