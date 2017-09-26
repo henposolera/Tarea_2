@@ -1,5 +1,5 @@
 //============================================================================
-// Name        : for.cpp
+// Name        : 5.cpp
 // Author      : 
 // Version     :
 // Copyright   : Your copyright notice
@@ -9,55 +9,122 @@
 #include <iostream>
 using namespace std;
 
-int jug1 = 121312;
-int jug2 = 19;
-int jug3 = 1906777;
-int jug4 = 19;
-//int jug[5] = {0,jug1, jug2, jug3, jug4};
-int menor = 0;
-int valor = 0;
-string nombreJug1 = "Jose";
-string nombreJug2 = "Juan";
-string nombreJug3 = "Pedro";
-string nombreJug4 = "Human";
-
 
 
 int main() {
+int total = 0;   // suma todos los puntajes
+int test[3][4]; // empieza en 1, 1 linea por turno de 3 flechas
+int jugador[5]; // empieza en 1, total de 4 jugadores
+int nJugadores; // numero de jugadores
+string nombre[4];
+string nombrePerdedor;
+string perdedor[5];
+int tiro[] = {0,0,0,0,0,0};
+int ronda =1;
+string almuerzo[5];
+int numRonda[5];
+int menor;
+int tiro1 =0;
 
-
-	if (jug1 < jug2) {
-	  menor = jug1;
-	  valor = 1;
-	}  if (jug2 < jug1) {
-	  menor = jug2;
-	  valor = 2;
-	}  if (jug3 !=0 && jug3 < menor){
-	  menor = jug3;
-	  valor = 3;
-	}  if (jug4 !=0 && jug4 < menor) {
-	  menor = jug4;
-	  valor = 4;
+	while (ronda <=5) {
+	cout << "Ronda " << ronda << endl;
+	cout << "Escriba el numero de jugadores: " << flush;
+	cin >> nJugadores;
+	menor = 61;
+	while (nJugadores < 1 || nJugadores > 4 ) {
+	  cout <<  "Error: numero de jugadores incorrecto." << endl;
+		cout << "Se permiten 2, 3, 4 jugadores" << endl;
+		cout << "Escriba el numero de jugadores: " << flush;
+		cin >> nJugadores;
 	}
-	cout << "El menor es : " << valor << endl;
+
+	  for (size_t a = 1; a <= nJugadores; a++) {
+	    cout << "Jugador " << a << ":" << endl;
+			cout << "Nombre Jugador " << a << ": " << flush;
+			cin >> nombre[a];
+	    for (size_t i = 1; i < 3; i++) {
+	      for (size_t j = 1; j < 4; j++) {
+	        cout << "turno " << i << " - " <<  "flecha "<< j  <<  ": "<< flush;
+	        cin >> test[i][j];
+	        while (test[i][j] < 1 || test[i][j] > 10) {
+	          cout << "Valor incorrecto" << endl;
+	        	cout<< "turno " << i << " - " <<  "flecha "<< j  <<  ": "<< flush;
+	        	cin >> test[i][j];
+	        }
+	        total = total + test[i][j];
+	      }
+	      jugador[a] = test[1][1] + test[1][2]+ test[1][3] + test[2][1] + test[2][2] + test[2][3];
 
 
-	switch (valor) {
+
+	    }
+	    cout << "Total Jugador " << nombre[a] << " #" << a << ": " << jugador[a] << endl;
+	    if (jugador[a] <= menor) {
+	    	menor= jugador[a];
+	    //	jmenor = a;
+	    	nombrePerdedor = nombre[a];
+
+	    }
+
+
+	  }
+	  numRonda[ronda] = ronda;
+	  cout << "El puntaje menor es: "  << nombrePerdedor << " con " << menor << " puntos" << endl;
+	  cout << "Tire la flecha para determinar almuerzo castigo" << endl;
+	  cout << "Puntaje del Tiro: " << flush;
+	  cin >> tiro[ronda];
+	  perdedor[ronda]= nombrePerdedor;
+	  cout << "tiro: " << tiro[ronda] << endl;
+
+	  switch (tiro[ronda]) {
 	  case 1:
-		  cout << "El perderor es: " << nombreJug1 << " " << "con " << jug1 << " puntos" << endl;
-		  break;
+	    almuerzo[ronda] = "Un confite";
+	    break;
 	  case 2:
-		  cout << "El perderor es: " << nombreJug2 << " " << "con " << jug2 << " puntos" << endl;
-		  break;
+	    almuerzo[ronda] = "1 milan";
+	    break;
 	  case 3:
-		  cout << "El perderor es: " << nombreJug3 << " " << "con " << jug3 << " puntos" << endl;
-		  break;
+	    almuerzo[ronda] = "Una melcocha";
+	    break;
 	  case 4:
-		  cout << "El perderor es: " << nombreJug4 << " " << "con " << jug4 << " puntos" << endl;
-		  break;
+	    almuerzo[ronda] = "Una merendina";
+	    break;
+	  case 5:
+	    almuerzo[ronda] = "Una rosquilla";
+	    break;
+	  case 6:
+	    almuerzo[ronda] = "Una botella de agua y un confite";
+	    break;
+	  case 7:
+	    almuerzo[ronda] = "Una botella de agua y un milan";
+	    break;
+	  case 8:
+	    almuerzo[ronda] = "Una botella de agua y una melcocha";
+	    break;
+	  case 9:
+	    almuerzo[ronda] = "Una botella de agua y una galleta";
+	    break;
+	  case 10:
+	    almuerzo[ronda] = "Una bolsa de palomitas con una botella de agua";
+	    break;
+	  }
 
+	cout << "Jugador "<< perdedor[ronda] << " con " << tiro[ronda] << " puntos debe comer " << almuerzo[ronda] << endl;
+	ronda++;
+
+	  }
+
+	cout << "Resumen de perdedores: " << endl;
+	cout << "Ronda " <<  numRonda[1] << " " << "Jugador: " << perdedor[1] << " Puntaje: " << tiro[1] << " Almuerzo: "<<  almuerzo[1] << endl;
+	cout << "Ronda " <<  numRonda[2] << " " << "Jugador: " << perdedor[2] << " Puntaje: " << tiro[2] << " Almuerzo: "<<  almuerzo[2] << endl;
+	cout << "Ronda " <<  numRonda[3] << " " << "Jugador: " << perdedor[3] << " Puntaje: " << tiro[3] << " Almuerzo: "<<  almuerzo[3] << endl;
+	cout << "Ronda " <<  numRonda[4] << " " << "Jugador: " << perdedor[4] << " Puntaje: " << tiro[4] << " Almuerzo: "<<  almuerzo[4] << endl;
+	cout << "Ronda " <<  numRonda[5] << " " << "Jugador: " << perdedor[5] << " Puntaje: " << tiro[5] << " Almuerzo: "<<  almuerzo[5] << endl;
+	cout << "Total de Puntos " << total << endl;
+	cout << "Promedio de puntos por jugador" << endl;
+
+
+
+	  return 0;
 	}
 
-
-	return 0;
-}
