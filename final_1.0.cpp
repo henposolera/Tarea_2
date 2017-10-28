@@ -7,7 +7,15 @@
 //============================================================================
 
 #include <iostream>
-using namespace std;
+using std::cout;
+using std::cin;
+using std::flush;
+using std::endl;
+using std::string;
+#include <iomanip>
+using std::setw;
+
+
 void encabezado();
 void ordenaValores(int jugadores, string nombres[], int puntaje[] );
 string almuerzoCastigo(int x);
@@ -20,22 +28,22 @@ int main() {
 	cin >> jugadores;
 	while (jugadores < 2 || jugadores > 4){
 		cout << "Error: solo se permiten de 2 a 4 jugadores." << endl;
-		cout << "ingrese el numero de jugadores: " << flush;
+		cout << "Ingrese el numero de jugadores: " << flush;
 		cin >> jugadores;
 	}
 
 
-	string nombreJugador[5]; 
+	string nombreJugador[5];
 	string nombreTemp[5];
 	string nombreCastigo[5];
 	string castigoRonda[5];
-	// Guarda nombre de jugadores 
+	// Guarda nombre de jugadores
 	for (size_t e = 1; e <= jugadores; e++) {
 		cout << "Escriba el nombre del jugador # " << e << " : " << flush;
 		cin >> nombreJugador[e];
 		nombreTemp[e] = nombreJugador[e];
 	}
-	
+
 	cout << "\n";
 	// inicializa variables en 0
 	int puntos[3][4] = { {0,0,0,0}, {0,0,0,0}, {0,0,0,0} };
@@ -44,14 +52,14 @@ int main() {
 	int totalPuntosJugador[4] = {0,0,0,0};
 	//int miJugador[4] = {0,0,0,0};
 	int sumaJugador = 0;
-	
-	// Inicia rondas de juego 
+
+	// Inicia rondas de juego
 	for (size_t r = 1; r <= 5; r++) { // rondas
 		cout << "----------------------------------------INICIO DE LA RONDA " << r << " -----------------------------------\n" << endl;
 		for (size_t s = 1; s <= jugadores; s++) { // aca va el numero de jugadores
 			sumaJugador = 0; // re-inicializa la suma a 0 por cada jugador
-			for (size_t i = 1; i < 3; i++)  // conteo de turnos 
-				for (size_t j = 1; j < 4; j++) {  //flechas 
+			for (size_t i = 1; i < 3; i++)  // conteo de turnos
+				for (size_t j = 1; j < 4; j++) {  //flechas
 					cout  << "Puntaje de "<< nombreJugador[s] << ". Turno # " << i << " " << ". Flecha # " << j << " : " << flush;
 					cin >> puntos[i][j];
 					while (puntos[i][j] < 1 || puntos[i][j] > 10){
@@ -60,7 +68,7 @@ int main() {
 						cin >> puntos[i][j];
 					}
 					totalPuntosJugador[s] = totalPuntosJugador[s] + puntos[i][j];   // guarda total de puntos por jugador
-					//miJugador[s] = totalPuntosJugador[s];						  //	
+					//miJugador[s] = totalPuntosJugador[s];						  //
 					total[i][j] = total[i][j] + puntos[i][j];                       // suma el puntaje de cada tiro
 					sumaJugador = sumaJugador + puntos[i][j];                      // guarda valor del total de puntos del jugador en la ronda
 				}
@@ -71,7 +79,7 @@ int main() {
 			//cout << "Acumulado Jugador " << s << " : "<<  totalPuntosJugador[s] << endl;
 		}
 		cout << "----------------------------------------RESULTADOS DE LA RONDA "<< r << " --------------------------------------- " << endl;
-		cout << "POSICION------PUNTAJE----NOMBRE-----------\n";
+		cout << "POSICION"  << setw(20) << "PUNTAJE" << setw(22)<< "NOMBRE" <<  endl;
 		ordenaValores(jugadores, nombreTemp, totalJugador);
 		cout << "El perdedor de la ronda es: " << nombreTemp[jugadores] << " " << " con " << totalJugador[jugadores] << " puntos.\n" << endl;
 
@@ -95,7 +103,7 @@ int main() {
 	}
 
 	//IMPRIME RESULTADOS
-	
+
 	cout << "-------------------------------------------------ALMUERZOS------------------------------------------------------\n";
 	for (int p=1 ; p <= (jugadores+1); p++) {
 		cout << "Ronda: "<< p << " Nombre: "<< nombreCastigo[p] << " Almuerzo: " << castigoRonda[p] << endl;
@@ -129,7 +137,7 @@ void ordenaValores(int jugadores, string nombres[], int puntaje[] ) {
 			}
 	for (int h=1; h<(jugadores+1); h++)
 
-		cout << "  "<< h << ")            " << puntaje[h] << "       "<< nombres[h] << endl;
+		cout << "  "<< h << ")" << setw(21) <<  puntaje[h] << setw(25)<< nombres[h] << endl;
 	cout << endl;
 }
 
@@ -166,6 +174,9 @@ string almuerzoCastigo(int x){
 	case 10:
 		almuerzo = "Una bolsa de palomitas con una botella de agua";
 		break;
+	default:
+		cout << "Ingreso un valor incorrecto" << endl;
+		break;
 	}
 	return almuerzo;
 }
@@ -184,6 +195,10 @@ void encabezado() {
 	cout << "---------------------------------------------------------------------------------------------------\n" << endl;
 	cout << "--------------------------------------------INICIO DEL JUEGO---------------------------------------\n" << endl;
 }
+
+
+
+
 
 
 
